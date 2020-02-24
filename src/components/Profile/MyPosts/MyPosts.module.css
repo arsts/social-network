@@ -1,0 +1,8 @@
+.mainContent {
+  grid-area: c;
+  background-color: cornflowerblue;
+}
+
+.item {
+  color: greenyellow;
+}
