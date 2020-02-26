@@ -7,7 +7,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 const mapStateToProps = state => {
-  return state;
+  return state.dialogsReducer;
 };
 
 const mapDispatchToProps = dispatch => {
@@ -15,8 +15,8 @@ const mapDispatchToProps = dispatch => {
     onUpdateNewMessageBody: e => {
       dispatch(updateMessageBody(e.target.value));
     },
-    onSendMessage: e => {
-      dispatch(sendMessage(e.target.value));
+    onSendMessage: () => {
+      dispatch(sendMessage());
     }
   };
 };
@@ -25,11 +25,9 @@ const Dialogs = props => {
   let dialogsElements = props.dialogs.map(item => (
     <DialogItem name={item.name} id={item.id} />
   ));
-
   const messagesElements = props.messages.map(item => (
     <Message message={item.message} id={item.id} />
   ));
-
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>

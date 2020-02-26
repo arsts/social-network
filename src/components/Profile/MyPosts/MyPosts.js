@@ -1,29 +1,46 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { connect } from "react-redux";
+import { sendPost, updatePostBody } from "../../../redux/actions";
+
+const mapStateToProps = state => {
+  return state.profileReducer;
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onPostChange: e => {
+      dispatch(updatePostBody(e.target.value));
+    },
+    onPostSubmit: () => {
+      dispatch(sendPost());
+    }
+  };
+};
 
 const MyPosts = props => {
+  const postsItems = props.posts.map(item => (
+    <Post message={item.message} key={item.id} />
+  ));
+
   return (
     <div>
       <h3>My Posts</h3>
       <div>
-        <textarea name="" id="" cols="30" rows="3"></textarea>
         <div>
-          <button
-            onClick={() => {
-              alert("hello!");
-            }}
-          >
-            Add post
-          </button>
+          <textarea
+            value={props.postBody}
+            onChange={props.onPostChange}
+          ></textarea>
+        </div>
+        <div>
+          <button onClick={props.onPostSubmit}>Add post</button>
         </div>
       </div>
-
-      {props.posts.map(item => (
-        <Post message={item.message} key={item.id} />
-      ))}
+      <div>{postsItems}</div>
     </div>
   );
 };
 
-export default MyPosts;
+export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
