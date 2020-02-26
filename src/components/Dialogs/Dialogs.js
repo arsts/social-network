@@ -23,10 +23,10 @@ const mapDispatchToProps = dispatch => {
 
 const Dialogs = props => {
   let dialogsElements = props.dialogs.map(item => (
-    <DialogItem name={item.name} id={item.id} />
+    <DialogItem name={item.name} id={item.id} key={item.id} />
   ));
   const messagesElements = props.messages.map(item => (
-    <Message message={item.message} id={item.id} />
+    <Message message={item.message} key={item.id} />
   ));
   return (
     <div className={s.dialogs}>
