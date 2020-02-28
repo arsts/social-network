@@ -1,32 +1,18 @@
-import { FOLLOW, UNFOLLOW, SET_USERS } from "./constants";
+import {
+  FOLLOW,
+  UNFOLLOW,
+  SET_USERS,
+  SET_CURRENT_PAGE,
+  SET_TOTAL_USERS_COUNT,
+  TOGGLE_IS_FETCHING
+} from "./constants";
 
 const initialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
-    //   followed: false,
-    //   fullName: "Sofia",
-    //   status: "I am feeling good 🎇",
-    //   location: { city: "Moscow", country: "Russia" }
-    // },
-    // {
-    //   id: 2,
-    //   avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
-    //   followed: false,
-    //   fullName: "Diana",
-    //   status: "Italy mood 🍕",
-    //   location: { city: "Moscow", country: "Russia" }
-    // },
-    // {
-    //   id: 3,
-    //   avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
-    //   followed: false,
-    //   fullName: "Sergey",
-    //   status: "I am feeling good",
-    //   location: { city: "Moscow", country: "Russia" }
-    // }
-  ]
+  users: [],
+  pageSize: 50,
+  totalUsersCount: 0,
+  currentPage: 1,
+  isFetching: false
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -52,7 +38,19 @@ export const usersReducer = (state = initialState, action) => {
       });
     case SET_USERS:
       return Object.assign({}, state, {
-        users: [state.users, ...action.payload]
+        users: action.payload
+      });
+    case SET_CURRENT_PAGE:
+      return Object.assign({}, state, {
+        currentPage: action.currentPage
+      });
+    case SET_TOTAL_USERS_COUNT:
+      return Object.assign({}, state, {
+        totalUsersCount: action.payload
+      });
+    case TOGGLE_IS_FETCHING:
+      return Object.assign({}, state, {
+        isFetching: action.payload
       });
 
     default:

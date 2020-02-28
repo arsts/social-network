@@ -6,3 +6,6 @@ export const UPDATE_POST_BODY = "UPDATE_POST_BODY";
 export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
 export const SET_USERS = "SET_USERS";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";

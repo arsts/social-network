@@ -5,7 +5,10 @@ import {
   UPDATE_POST_BODY,
   FOLLOW,
   UNFOLLOW,
-  SET_USERS
+  SET_USERS,
+  SET_CURRENT_PAGE,
+  SET_TOTAL_USERS_COUNT,
+  TOGGLE_IS_FETCHING
 } from "./constants";
 
 export const sendMessage = () => ({
@@ -25,15 +28,27 @@ export const updatePostBody = body => ({
   payload: body
 });
 
-export const followAC = userId => ({
+export const follow = userId => ({
   type: FOLLOW,
   payload: userId
 });
-export const unfollowAC = userId => ({
+export const unfollow = userId => ({
   type: UNFOLLOW,
   payload: userId
 });
-export const setUsersAC = users => ({
+export const setUsers = users => ({
   type: SET_USERS,
   payload: users
+});
+export const setCurrentPage = currentPage => ({
+  type: SET_CURRENT_PAGE,
+  currentPage
+});
+export const setTotalUsersCount = totalUsers => ({
+  type: SET_TOTAL_USERS_COUNT,
+  payload: totalUsers
+});
+export const setIsFetching = isFetching => ({
+  type: TOGGLE_IS_FETCHING,
+  payload: isFetching
 });
