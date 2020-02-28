@@ -34,3 +34,11 @@ export const dialogsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const sendMessage = () => ({
+  type: SEND_MESSAGE
+});
+export const updateMessageBody = text => ({
+  type: UPDATE_MESSAGE_BODY,
+  payload: text
+});

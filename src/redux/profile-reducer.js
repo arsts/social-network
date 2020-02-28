@@ -1,4 +1,4 @@
-import { SEND_POST, UPDATE_POST_BODY } from "./constants";
+import { SEND_POST, UPDATE_POST_BODY, SET_USER_PROFILE } from "./constants";
 
 const initialState = {
   posts: [
@@ -7,7 +7,8 @@ const initialState = {
     { id: 3, message: "Yo", likesCount: 12 },
     { id: 4, message: "Yo", likesCount: 12 }
   ],
-  postBody: ""
+  postBody: "",
+  profile: null
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -20,8 +21,23 @@ export const profileReducer = (state = initialState, action) => {
 
     case UPDATE_POST_BODY:
       return Object.assign({}, state, { postBody: action.payload });
+    case SET_USER_PROFILE:
+      return Object.assign({}, state, { profile: action.payload });
 
     default:
       return state;
   }
 };
+
+export const sendPost = () => ({
+  type: SEND_POST
+});
+
+export const updatePostBody = body => ({
+  type: UPDATE_POST_BODY,
+  payload: body
+});
+export const setUserProfile = userProfile => ({
+  type: SET_USER_PROFILE,
+  payload: userProfile
+});

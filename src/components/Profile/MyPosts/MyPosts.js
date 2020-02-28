@@ -2,7 +2,7 @@ import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { connect } from "react-redux";
-import { sendPost, updatePostBody } from "../../../redux/actions";
+import { sendPost, updatePostBody } from "../../../redux/profile-reducer";
 
 const mapStateToProps = state => {
   return state.profileReducer;

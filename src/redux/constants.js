@@ -1,7 +1,9 @@
 export const SEND_MESSAGE = "SEND_MESSAGE";
 export const UPDATE_MESSAGE_BODY = "UPDATE_MESSAGE_BODY";
+
 export const SEND_POST = "SEND_POST";
 export const UPDATE_POST_BODY = "UPDATE_POST_BODY";
+export const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";

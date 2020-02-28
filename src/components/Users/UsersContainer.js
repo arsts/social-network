@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Users from "./Users";
-import Loader from "./Loader";
+import Loader from "../common/Loader";
 import {
   follow,
   unfollow,
@@ -8,7 +8,7 @@ import {
   setCurrentPage,
   setTotalUsersCount,
   setIsFetching
-} from "../../redux/actions";
+} from "../../redux/users-reducer";
 
 import * as axios from "axios";
 import React from "react";

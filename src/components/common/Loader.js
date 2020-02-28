@@ -3,9 +3,9 @@ import styles from "./Loader.module.css";
 
 const Loader = () => {
   return (
-    <div class={styles.gooey}>
-      <span class={styles.dot}></span>
-      <div class={styles.dots}>
+    <div className={styles.gooey}>
+      <span className={styles.dot}></span>
+      <div className={styles.dots}>
         <span></span>
         <span></span>
         <span></span>
