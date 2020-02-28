@@ -2,30 +2,30 @@ import { FOLLOW, UNFOLLOW, SET_USERS } from "./constants";
 
 const initialState = {
   users: [
-    {
-      id: 1,
-      avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
-      followed: false,
-      fullName: "Sofia",
-      status: "I am feeling good 🎇",
-      location: { city: "Moscow", country: "Russia" }
-    },
-    {
-      id: 2,
-      avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
-      followed: false,
-      fullName: "Diana",
-      status: "Italy mood 🍕",
-      location: { city: "Moscow", country: "Russia" }
-    },
-    {
-      id: 3,
-      avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
-      followed: false,
-      fullName: "Sergey",
-      status: "I am feeling good",
-      location: { city: "Moscow", country: "Russia" }
-    }
+    // {
+    //   id: 1,
+    //   avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
+    //   followed: false,
+    //   fullName: "Sofia",
+    //   status: "I am feeling good 🎇",
+    //   location: { city: "Moscow", country: "Russia" }
+    // },
+    // {
+    //   id: 2,
+    //   avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
+    //   followed: false,
+    //   fullName: "Diana",
+    //   status: "Italy mood 🍕",
+    //   location: { city: "Moscow", country: "Russia" }
+    // },
+    // {
+    //   id: 3,
+    //   avatarUrl: "https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg",
+    //   followed: false,
+    //   fullName: "Sergey",
+    //   status: "I am feeling good",
+    //   location: { city: "Moscow", country: "Russia" }
+    // }
   ]
 };
 
