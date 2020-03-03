@@ -47,11 +47,16 @@ const Users = props => {
               <div>
                 {user.followed ? (
                   <button
+                    disabled={props.followingInProgress.some(
+                      id => id === user.id
+                    )}
                     onClick={() => {
+                      props.toggleFollowingInProgress(user.id, true);
                       unfollowUser(user.id).then(response => {
                         if (response.data.resultCode === 0) {
                           props.unfollow(user.id);
                         }
+                        props.toggleFollowingInProgress(user.id, false);
                       });
                     }}
                   >
@@ -59,11 +64,17 @@ const Users = props => {
                   </button>
                 ) : (
                   <button
+                    disabled={props.followingInProgress.some(
+                      id => id === user.id
+                    )}
                     onClick={() => {
+                      props.toggleFollowingInProgress(user.id, true);
                       followUser(user.id).then(response => {
+                        // props.toggleFollowingInProgress(user.id);
                         if (response.data.resultCode === 0) {
                           props.follow(user.id);
                         }
+                        props.toggleFollowingInProgress(user.id, false);
                       });
                     }}
                   >
