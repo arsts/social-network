@@ -1,25 +1,9 @@
 import React from "react";
 import s from "./Dialogs.module.css";
 
-import { connect } from "react-redux";
-import { sendMessage, updateMessageBody } from "../../redux/dialogs-reducer";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-
-const mapStateToProps = state => {
-  return state.dialogsReducer;
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onUpdateNewMessageBody: e => {
-      dispatch(updateMessageBody(e.target.value));
-    },
-    onSendMessage: () => {
-      dispatch(sendMessage());
-    }
-  };
-};
+import { Redirect } from "react-router-dom";
 
 const Dialogs = props => {
   let dialogsElements = props.dialogs.map(item => (
@@ -28,6 +12,10 @@ const Dialogs = props => {
   const messagesElements = props.messages.map(item => (
     <Message message={item.message} key={item.id} />
   ));
+  if (props.isAuth === false) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
@@ -49,4 +37,4 @@ const Dialogs = props => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+export default Dialogs;

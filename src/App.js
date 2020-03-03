@@ -3,14 +3,15 @@ import "./App.css";
 
 import Navbar from "./components/Navbar/Navbar";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import Dialogs from "./components/Dialogs/Dialogs";
+
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import { Route, BrowserRouter } from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import LoginPage from "./components/Login/Login";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 function App(props) {
   return (
@@ -19,8 +20,8 @@ function App(props) {
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route path="/dialogs" render={() => <Dialogs />} />
-          <Route path="/login" render={() => <Login />} />
+          <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/login" render={() => <LoginPage />} />
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/news" component={News} />
