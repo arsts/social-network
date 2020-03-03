@@ -10,6 +10,7 @@ import Settings from "./components/Settings/Settings";
 import { Route, BrowserRouter } from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 function App(props) {
   return (
@@ -19,6 +20,7 @@ function App(props) {
         <Navbar />
         <div className="app-wrapper-content">
           <Route path="/dialogs" render={() => <Dialogs />} />
+          <Route path="/login" render={() => <Login />} />
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/news" component={News} />

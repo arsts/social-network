@@ -1,4 +1,5 @@
 import { SEND_POST, UPDATE_POST_BODY, SET_USER_PROFILE } from "./constants";
+import { usersAPI } from "../api/api";
 
 const initialState = {
   posts: [
@@ -41,3 +42,9 @@ export const setUserProfile = userProfile => ({
   type: SET_USER_PROFILE,
   payload: userProfile
 });
+
+export const getUserProfile = userId => dispatch => {
+  usersAPI.getProfile(userId).then(response => {
+    dispatch(setUserProfile(response.data));
+  });
+};
