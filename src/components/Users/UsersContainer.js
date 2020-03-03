@@ -10,7 +10,7 @@ import {
   setIsFetching,
   toggleFollowingInProgress
 } from "../../redux/users-reducer";
-import { getUsers } from "../../api/api";
+import { usersAPI } from "../../api/api";
 
 import React from "react";
 
@@ -28,19 +28,21 @@ const mapStateToProps = state => {
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.setIsFetching(true);
-    getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-      this.props.setIsFetching(false);
+    usersAPI
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then(response => {
+        this.props.setIsFetching(false);
 
-      this.props.setUsers(response.items);
+        this.props.setUsers(response.items);
 
-      this.props.setTotalUsersCount(response.totalCount);
-    });
+        this.props.setTotalUsersCount(response.totalCount);
+      });
   }
 
   onPageChanged = pageNumber => {
     this.props.setIsFetching(true);
     this.props.setCurrentPage(pageNumber);
-    getUsers(pageNumber, this.props.pageSize).then(response => {
+    usersAPI.getUsers(pageNumber, this.props.pageSize).then(response => {
       this.props.setIsFetching(false);
       this.props.setUsers(response.items);
     });
