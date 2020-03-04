@@ -3,9 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { sendMessage, updateMessageBody } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 const mapStateToProps = state => {
-  return { ...state.dialogsReducer, isAuth: state.authReducer.isAuth };
+  return { ...state.dialogsReducer };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -18,14 +20,8 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-class DialogsContainer extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <Dialogs {...this.props} />
-      </React.Fragment>
-    );
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DialogsContainer);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs);
