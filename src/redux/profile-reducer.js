@@ -1,9 +1,4 @@
-import {
-  SEND_POST,
-  UPDATE_POST_BODY,
-  SET_USER_PROFILE,
-  SET_STATUS
-} from "./constants";
+import { SEND_POST, SET_USER_PROFILE, SET_STATUS } from "./constants";
 import { usersAPI, profileAPI } from "../api/api";
 
 const initialState = {
@@ -13,7 +8,6 @@ const initialState = {
     { id: 3, message: "Yo", likesCount: 12 },
     { id: 4, message: "Yo", likesCount: 12 }
   ],
-  postBody: "",
   profile: null,
   status: ""
 };
@@ -22,12 +16,12 @@ export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_POST:
       return Object.assign({}, state, {
-        posts: [...state.posts, { id: 5, message: state.postBody, likes: 12 }],
-        postBody: ""
+        posts: [
+          ...state.posts,
+          { id: 5, message: action.newPostBody, likes: 12 }
+        ]
       });
 
-    case UPDATE_POST_BODY:
-      return Object.assign({}, state, { postBody: action.payload });
     case SET_USER_PROFILE:
       return Object.assign({}, state, { profile: action.payload });
     case SET_STATUS:
@@ -38,14 +32,11 @@ export const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const sendPost = () => ({
-  type: SEND_POST
+export const sendPost = newPostBody => ({
+  type: SEND_POST,
+  newPostBody
 });
 
-export const updatePostBody = body => ({
-  type: UPDATE_POST_BODY,
-  payload: body
-});
 export const setUserProfile = userProfile => ({
   type: SET_USER_PROFILE,
   payload: userProfile
