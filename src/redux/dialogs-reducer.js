@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, UPDATE_MESSAGE_BODY } from "./constants";
+import { SEND_MESSAGE } from "./constants";
 
 const initialState = {
   messages: [
@@ -16,29 +16,23 @@ const initialState = {
     { id: 4, name: "Sasha" },
     { id: 5, name: "Viktor" },
     { id: 6, name: "Valera" }
-  ],
-  newMessageBody: ""
+  ]
 };
 
 export const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_MESSAGE:
+      const body = action.newMessageBody;
       return Object.assign({}, state, {
-        messages: [...state.messages, { id: 7, message: state.newMessageBody }],
-        newMessageBody: ""
+        messages: [...state.messages, { id: 7, message: body }]
       });
 
-    case UPDATE_MESSAGE_BODY:
-      return Object.assign({}, state, { newMessageBody: action.payload });
     default:
       return state;
   }
 };
 
-export const sendMessage = () => ({
-  type: SEND_MESSAGE
-});
-export const updateMessageBody = text => ({
-  type: UPDATE_MESSAGE_BODY,
-  payload: text
+export const sendMessage = newMessageBody => ({
+  type: SEND_MESSAGE,
+  newMessageBody
 });
