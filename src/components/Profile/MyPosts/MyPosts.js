@@ -4,6 +4,11 @@ import Post from "./Post/Post";
 import { connect } from "react-redux";
 import { sendPost } from "../../../redux/profile-reducer";
 import { Field, reduxForm } from "redux-form";
+import {
+  required,
+  maxLengthCreator
+} from "../../../utils/validators/validator";
+import { Textarea } from "../../common/FormsControls/FormsControls";
 
 const mapStateToProps = state => {
   return state.profileReducer;
@@ -17,13 +22,16 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const maxLength10 = maxLengthCreator(10);
+
 const AddPostForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
-        component="textarea"
+        component={Textarea}
         name="newPostBody"
         placeholder="Enter post text"
+        validate={[required, maxLength10]}
       />
       <div>
         <button>Add post</button>

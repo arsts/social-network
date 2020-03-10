@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Users from "./Users";
-import Loader from "../common/Loader";
+
 import {
   followSuccess,
   unfollowSuccess,
@@ -15,6 +15,7 @@ import {
 } from "../../redux/users-reducer";
 
 import React from "react";
+import Loader from "../common/Preloader/Loader";
 
 const mapStateToProps = state => {
   return {
