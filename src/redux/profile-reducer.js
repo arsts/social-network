@@ -48,6 +48,7 @@ export const setStatus = status => ({
 });
 
 export const getUserProfile = userId => dispatch => {
+  debugger;
   usersAPI.getProfile(userId).then(response => {
     dispatch(setUserProfile(response.data));
   });
