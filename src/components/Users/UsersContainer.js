@@ -14,17 +14,26 @@ import {
   unfollow
 } from "../../redux/users-reducer";
 
+import {
+  selectUsers,
+  selectPageSize,
+  selectTotalUsersCount,
+  selectCurrentPage,
+  selectIsFetching,
+  selectFollowingInProgress
+} from "../../redux/users-selectors";
+
 import React from "react";
 import Loader from "../common/Preloader/Loader";
 
 const mapStateToProps = state => {
   return {
-    users: state.usersReducer.users,
-    pageSize: state.usersReducer.pageSize,
-    totalUsersCount: state.usersReducer.totalUsersCount,
-    currentPage: state.usersReducer.currentPage,
-    isFetching: state.usersReducer.isFetching,
-    followingInProgress: state.usersReducer.followingInProgress
+    users: selectUsers(state),
+    pageSize: selectPageSize(state),
+    totalUsersCount: selectTotalUsersCount(state),
+    currentPage: selectCurrentPage(state),
+    isFetching: selectIsFetching(state),
+    followingInProgress: selectFollowingInProgress(state)
   };
 };
 
