@@ -44,7 +44,10 @@ const AddPostFormRedux = reduxForm({
   form: "profileAddPostForm"
 })(AddPostForm);
 
-const MyPosts = props => {
+const MyPosts = React.memo(props => {
+  // debugger;
+  console.log("RENDER");
+
   const addNewPost = values => {
     props.onPostSubmit(values.newPostBody);
   };
@@ -60,6 +63,6 @@ const MyPosts = props => {
       <div>{postsItems}</div>
     </div>
   );
-};
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
