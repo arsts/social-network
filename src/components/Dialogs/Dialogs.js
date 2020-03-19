@@ -10,9 +10,9 @@ import { maxLengthCreator, required } from "../../utils/validators/validator";
 
 const maxLength50 = maxLengthCreator(50);
 
-const AddMessageForm = props => {
+const AddMessageForm = ({ handleSubmit }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field
         component={Textarea}
         validate={[required, maxLength50]}
@@ -30,20 +30,20 @@ const AddMessageFormRedux = reduxForm({
   form: "dialogAddMessageForm"
 })(AddMessageForm);
 
-const Dialogs = props => {
-  let dialogsElements = props.dialogs.map(item => (
+const Dialogs = ({ dialogs, onSendMessage, messages, isAuth }) => {
+  let dialogsElements = dialogs.map(item => (
     <DialogItem name={item.name} id={item.id} key={item.id} />
   ));
 
   const addNewMessage = values => {
-    props.onSendMessage(values.newMessageBody);
+    onSendMessage(values.newMessageBody);
   };
 
-  const messagesElements = props.messages.map(item => (
+  const messagesElements = messages.map(item => (
     <Message message={item.message} key={item.id} />
   ));
 
-  if (props.isAuth === false) {
+  if (isAuth === false) {
     return <Redirect to="/login" />;
   }
 

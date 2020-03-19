@@ -16,7 +16,7 @@ class ProfileContainer extends Component {
     if (!userId) {
       userId = this.props.authorisedUserId;
       if (!userId) {
-        // non JSX redirect
+        // non-JSX redirect!!
         this.props.history.push("/login");
       }
     }

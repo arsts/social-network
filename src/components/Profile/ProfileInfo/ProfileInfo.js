@@ -3,8 +3,8 @@ import s from "./ProfileInfo.module.css";
 import Loader from "../../common/Preloader/Loader";
 import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = props => {
-  if (!props.profile) {
+const ProfileInfo = ({ profile, status, updateStatus }) => {
+  if (!profile) {
     return <Loader />;
   }
   return (
@@ -18,13 +18,10 @@ const ProfileInfo = props => {
         />
       </div> */}
       <div>
-        <img src={props.profile.photos.large} alt="" />
-        <ProfileStatus
-          status={props.status}
-          updateStatus={props.updateStatus}
-        />
-        <p>{props.profile.fullName}</p>
-        <p>О себе: {props.profile.aboutMe}</p>
+        <img src={profile.photos.large} alt="" />
+        <ProfileStatus status={status} updateStatus={updateStatus} />
+        <p>{profile.fullName}</p>
+        <p>О себе: {profile.aboutMe}</p>
       </div>
     </div>
   );
