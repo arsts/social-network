@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./App.css";
 
 import Navbar from "./components/Navbar/Navbar";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+// import ProfileContainer from "./components/Profile/ProfileContainer";
 
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -11,11 +11,20 @@ import { Route, BrowserRouter, withRouter } from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { initialiseApp } from "./redux/app-reducer";
 import Loader from "./components/common/Preloader/Loader";
+import { withSuspense } from "./hoc/withSuspense";
+import Dialogs from "./components/Dialogs/Dialogs";
+
+const DialogsContainer = React.lazy(() =>
+  import("./components/Dialogs/DialogsContainer")
+);
+const ProfileContainer = React.lazy(() =>
+  import("./components/Profile/ProfileContainer")
+);
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,9 +40,12 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
           <Route path="/login" render={() => <LoginPage />} />
-          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
+          <Route
+            path="/profile/:userId?"
+            render={withSuspense(ProfileContainer)}
+          />
           <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/news" component={News} />
           <Route path="/music" component={Music} />

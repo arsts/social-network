@@ -97,8 +97,6 @@ export const toggleFollowingInProgress = (userId, isFetching) => ({
   isFetching
 });
 
-const followUnfollowFlow = async (dispatch, userId) => {};
-
 export const follow = userId => async dispatch => {
   const response = await usersAPI.followUser(userId);
   dispatch(toggleFollowingInProgress(userId, true));
