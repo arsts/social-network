@@ -17,7 +17,7 @@ const User = ({
         <div>
           <NavLink to={"/profile/" + user.id}>
             <img
-              src={userPhoto}
+              src={user.photos.large || userPhoto}
               style={{ width: "100px", borderRadius: "50%" }}
               alt=""
             />
