@@ -45,9 +45,6 @@ const AddPostFormRedux = reduxForm({
 })(AddPostForm);
 
 const MyPosts = React.memo(props => {
-  // debugger;
-  console.log("RENDER");
-
   const addNewPost = values => {
     props.onPostSubmit(values.newPostBody);
   };

@@ -6,7 +6,14 @@ import { useState } from "react";
 import userPhoto from "../../../images/user.jpg";
 import ProfileDataForm from "./ProfileDataForm";
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+const ProfileInfo = ({
+  profile,
+  status,
+  updateStatus,
+  isOwner,
+  savePhoto,
+  saveProfile
+}) => {
   const [editMode, setEditMode] = useState(false);
 
   if (!profile) {
@@ -14,10 +21,15 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
   }
 
   const onMainPhotoSelected = e => {
-    // debugger;
     if (e.target.files.length) {
       savePhoto(e.target.files[0]);
     }
+  };
+
+  const onSubmit = formData => {
+    saveProfile(formData).then(() => {
+      setEditMode(false);
+    });
   };
 
   return (
@@ -29,9 +41,15 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
           alt="avatar"
         />
         {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
+
         <ProfileStatus status={status} updateStatus={updateStatus} />
+
         {editMode ? (
-          <ProfileDataForm profile={profile} />
+          <ProfileDataForm
+            profile={profile}
+            initialValues={profile}
+            onSubmit={onSubmit}
+          />
         ) : (
           <ProfileData
             profile={profile}
@@ -59,10 +77,16 @@ const ProfileData = ({ profile, isOwner, goToEditMode }) => {
       <div>Looking for a job: {profile.lookingForAJob ? "yes" : "no"}</div>
       <div>My skills: {profile.lookingForAJobDescription}</div>
       <div>
-        <span>Contacts: </span>
+        <span>
+          <b>Contacts</b>
+        </span>
         {Object.keys(profile.contacts).map(key => {
           return (
-            <Contact contactTitle={key} contactValue={profile.contacts[key]} />
+            <Contact
+              key={key}
+              contactTitle={key}
+              contactValue={profile.contacts[key]}
+            />
           );
         })}
       </div>
