@@ -1,13 +1,15 @@
-import { authAPI } from "../api/api";
+import { authAPI, securityAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
 
 const SET_USER_DATA = "my-app/auth/SET_USER_DATA";
+const GET_CAPTCH_URL_SUCCESS = "my-app/auth/GET_CAPTCH_URL_SUCCESS";
 
 const initialState = {
   userId: null,
   email: null,
   login: null,
-  isAuth: false
+  isAuth: false,
+  captchaUrl: null
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -19,6 +21,8 @@ export const authReducer = (state = initialState, action) => {
         login: action.data.login,
         isAuth: action.data.isAuth
       });
+    case GET_CAPTCH_URL_SUCCESS:
+      return Object.assign({}, state, { captchaUrl: action.captchaUrl });
 
     default:
       return state;
@@ -36,6 +40,12 @@ export const setAuthUserData = (userId, email, login, isAuth) => {
     }
   };
 };
+export const getCaptchaUrlSuccess = captchaUrl => {
+  return {
+    type: GET_CAPTCH_URL_SUCCESS,
+    captchaUrl
+  };
+};
 
 export const getAuthUserData = () => async dispatch => {
   const response = await authAPI.me();
@@ -44,11 +54,20 @@ export const getAuthUserData = () => async dispatch => {
     dispatch(setAuthUserData(id, email, login, true));
   }
 };
-export const login = (email, password, rememberMe) => async dispatch => {
-  const response = await authAPI.login(email, password, rememberMe);
+export const login = (
+  email,
+  password,
+  rememberMe,
+  captcha
+) => async dispatch => {
+  const response = await authAPI.login(email, password, rememberMe, captcha);
   if (response.data.resultCode === 0) {
+    // success, get auth data
     dispatch(getAuthUserData());
   } else {
+    if (response.data.resultCode === 10) {
+      dispatch(getCaptchaUrl());
+    }
     let message =
       response.data.messages.length > 0
         ? response.data.messages[0]
@@ -62,4 +81,10 @@ export const logout = () => async dispatch => {
   if (response.data.resultCode === 0) {
     dispatch(setAuthUserData(null, null, null, false));
   }
+};
+
+export const getCaptchaUrl = () => async dispatch => {
+  const response = await securityAPI.getCaptchaUrl();
+  const captchaUrl = response.data.url;
+  dispatch(getCaptchaUrlSuccess(captchaUrl));
 };
